@@ -1,0 +1,54 @@
+# image url postgis/postgis:14-3.3
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgre
+  labels:
+    app: postgre
+spec:
+  clusterIP: None
+  ports:
+  - port: 5432
+  selector:
+    app: postgre
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgre
+spec:
+  selector:
+    matchLabels:
+      app: postgre 
+  serviceName: postgre
+  replicas: 1 
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: postgre
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: postgre
+        image: postgis/postgis:14-3.3
+        env:
+          - name: POSTGRES_USER
+            value: ZmnDbUsr7YHsl8Bu
+          - name: POSTGRES_PASSWORD
+            value: fa3TNIBkDTp60sR839BE247DJv2eOMP7
+        ports:
+        - containerPort: 5432
+          name: postgre
+        volumeMounts:
+        - name: postgre-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgre-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi

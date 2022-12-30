@@ -1,0 +1,15 @@
+# image url postgis/postgis:14-3.3
+version: "3"
+services:
+  postgre_postgist14:
+    container_name: postgre_postgist14
+    network_mode: bridge
+    image: postgis/postgis:14-3.3
+    volumes:
+      - ./datadir/postgre:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: ZmnDbUsr7YHsl8Bu
+      POSTGRES_PASSWORD: fa3TNIBkDTp60sR839BE247DJv2eOMP7
