@@ -34,9 +34,9 @@ spec:
         image: postgis/postgis:14-3.3
         env:
           - name: POSTGRES_USER
-            value: ZmnDbUsr7YHsl8Bu
+            value: example
           - name: POSTGRES_PASSWORD
-            value: fa3TNIBkDTp60sR839BE247DJv2eOMP7
+            value: example
         ports:
         - containerPort: 5432
           name: postgre
