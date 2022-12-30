@@ -32,11 +32,9 @@ spec:
       containers:
       - name: postgre
         image: postgis/postgis:14-3.3
-        env:
-          - name: POSTGRES_USER
-            value: example
-          - name: POSTGRES_PASSWORD
-            value: example
+        envFrom:
+        - secretRef:
+            name: pgcreds
         ports:
         - containerPort: 5432
           name: postgre
